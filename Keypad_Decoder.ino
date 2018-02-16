@@ -54,7 +54,7 @@ void setup ()
 
 void loop ()
   {
-  int keyNumber = 0;
+  byte keyNumber = 0;
   unsigned long now = millis ();  // for debouncing
   
   // check each row
