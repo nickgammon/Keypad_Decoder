@@ -1,5 +1,5 @@
 // Keypad_Decoder
-// 
+//
 // Author: Nick Gammon
 // Date: 17th February 2018
 
@@ -36,7 +36,7 @@ const byte colPins [COLS] = {2, 3, 4, 5}; //connect to the column pinouts of the
 const byte TOTAL_KEYS = ROWS * COLS;
 
 // remember previous setting of each key
-char lastKeySetting [TOTAL_KEYS / CHAR_BIT];  // one bit each, 0 = up, 1 = down
+char lastKeySetting [(TOTAL_KEYS + CHAR_BIT) / CHAR_BIT];  // one bit each, 0 = up, 1 = down
 unsigned long lastKeyTime [TOTAL_KEYS];       // when that key last changed
 unsigned long lastHeartbeat;                  // when we last sent the heartbeat
 
@@ -49,21 +49,21 @@ void setup ()
   if (ENABLE_PULLUPS)
     for (byte i = 0; i < COLS; i++)
       pinMode (colPins [i], INPUT_PULLUP);
-    
+
 }  // end of setup
 
 void loop ()
   {
   byte keyNumber = 0;
   unsigned long now = millis ();  // for debouncing
-  
+
   // check each row
   for (byte row = 0; row < ROWS; row++)
     {
     // set that row to OUTPUT and LOW
     pinMode (rowPins [row], OUTPUT);
     digitalWrite (rowPins [row], LOW);
-    
+
     // check each column to see if the switch has driven that column LOW
     for (byte col = 0; col < COLS; col++)
       {
@@ -94,7 +94,7 @@ void loop ()
         }  // debounce time up
       keyNumber++;
       } // end of for each column
-      
+
     // put row back to high-impedance (input)
     pinMode (rowPins [row], INPUT);
     }  // end of for each row
