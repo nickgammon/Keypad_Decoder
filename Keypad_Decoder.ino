@@ -36,7 +36,7 @@ const byte colPins [COLS] = {2, 3, 4, 5}; //connect to the column pinouts of the
 const byte TOTAL_KEYS = ROWS * COLS;
 
 // remember previous setting of each key
-char lastKeySetting [(TOTAL_KEYS + CHAR_BIT) / CHAR_BIT];  // one bit each, 0 = up, 1 = down
+char lastKeySetting [(TOTAL_KEYS + CHAR_BIT - 1) / CHAR_BIT];  // one bit each, 0 = up, 1 = down
 unsigned long lastKeyTime [TOTAL_KEYS];       // when that key last changed
 unsigned long lastHeartbeat;                  // when we last sent the heartbeat
 
